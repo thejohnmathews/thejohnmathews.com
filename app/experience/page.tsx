@@ -27,7 +27,7 @@ const techExperiences: Experience[] = [
     roles: [
       {
         title: "Junior Software Engineer",
-        startDate: "2024-09",
+        startDate: "2025-10",
         endDate: null,
         description: "Developing a full-stack web application for event ticketing and management. Working on the entire stack from database design to frontend development, utilizing Next.js and Postgres.",
         technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Jira"],
@@ -42,15 +42,15 @@ const techExperiences: Experience[] = [
     roles: [
       {
         title: "Junior Embedded Software Engineer",
-        startDate: "2022-08",
-        endDate: "2023-05",
+        startDate: "2023-08",
+        endDate: "2024-09",
         description: "Promoted to contract role developing embedded systems while in school. Worked on porting all 8052 ASM firmware to Embedded C to improve maintainability and add new features.",
         technologies: ["Embedded C", "ASM", "8052 Microcontroller", "Bare Metal", "Oscilloscope", "Serial/Infared Communication"],
       },
       {
         title: "Embedded Software Engineering Intern",
-        startDate: "2021-06",
-        endDate: "2022-08",
+        startDate: "2023-05",
+        endDate: "2023-08",
         description: "Internship focused on embedded systems development. Ported a proprietary embedded system in ASM to a protype system in Embedded C.",
         technologies: ["Embedded C", "ASM", "ATmega Microcontrollers", "RS-232 & RS-485", "Bootloaders"],
       }
@@ -66,7 +66,7 @@ const otherExperiences: Experience[] = [
     roles: [
       {
         title: "Auxiliar de Conversación",
-        startDate: "2024-08",
+        startDate: "2024-09",
         endDate: "2025-07",
         description: "Assisted in teaching English at a public primary school in Madrid. Taught conversational English to students aged 3-10, helping to enhance their language skills and cultural understanding.",
         highlights: [
@@ -83,14 +83,20 @@ const otherExperiences: Experience[] = [
     roles: [
       {
         title: "Aquatics Supervisor",
-        startDate: "2018-05",
+        startDate: "2020-01",
         endDate: "2022-08",
         description: "Supervised aquatics operations and lifeguard staff at a major amusement park. Managed team schedules, conducted safety training, and ensured guest safety across multiple water attractions.",
         highlights: [
-          "5 years of leadership experience",
+          "3 years of leadership experience",
           "Managed a team of 20+ lifeguards every day",
           "Ensured the safety and customer satisfaction of thousands of guests each season",
         ],
+      },
+      {
+        title: "Lifeguard and Certified Trainer",
+        startDate: "2018-05",
+        endDate: "2020-01",
+        description: "",
       }
     ],
     industry: "other",

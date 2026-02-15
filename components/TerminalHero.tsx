@@ -79,7 +79,7 @@ export default function TerminalHero() {
         <p className="pl-4 text-foreground">
           <span className="text-primary">int</span> yearsExperience{" "}
           <span className="text-foreground">=</span>{" "}
-          <span className="text-foreground">3</span>
+          <span className="text-foreground">{new Date().getFullYear() - 2023}</span>
           <span className="text-foreground">;</span>
         </p>
         <p className="text-foreground">{"};"}</p>

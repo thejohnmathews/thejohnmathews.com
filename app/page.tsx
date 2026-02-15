@@ -8,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-28 pb-20">
-        <div className="space-y-2 animate-fade-in-up">
+        <div className="space-y-2">
           <p className="font-mono text-xs text-muted-foreground">// welcome</p>
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
             Hello, I&apos;m <span className="text-primary">John</span>
@@ -18,11 +18,11 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="mt-10 animate-fade-in-up animate-delay-200">
+        <div className="mt-10">
           <TerminalHero />
         </div>
 
-        <div className="mt-12 animate-fade-in-up animate-delay-300">
+        <div className="mt-12">
           <AboutSection />
         </div>
 
