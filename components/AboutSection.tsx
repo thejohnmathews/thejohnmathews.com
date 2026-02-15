@@ -7,10 +7,10 @@ export default function AboutSection() {
     <section className="space-y-8">
       <div className="grid gap-8 md:grid-cols-2">
         {/* embedded */}
-        <div className="rounded-lg border border-border bg-card p-6 space-y-4 transition-colors hover:border-primary/50">
+        <div className="rounded-lg border border-border bg-card p-6 space-y-4 transition-colors hover:border-[hsl(100,40%,46%)]/50">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center">
-              <Cpu className="h-4 w-4 text-primary" />
+              <Cpu className="h-4 w-4 text-[hsl(100,40%,46%)]" />
             </div>
             <h3 className="text-sm font-semibold">Embedded Systems</h3>
           </div>

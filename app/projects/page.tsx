@@ -32,8 +32,8 @@ const projects: Project[] = [
     title: "johnmathews.dev",
     description:
       "My personal website built with Next.js and Tailwind CSS. I developed this site for fun to have a place to share my projects among other things I am interested in. \
-      I knew I wanted the design to reflect both my web dev and embedded interests, hence the ui that changes based on the project category. I also want to maybe add a \
-      travel blog here of some soft of my travels I did in Europe while I taught English in Spain. ",
+      I knew I wanted the design to reflect both my web dev and embedded interests, hence the ui that changes based on the project category. I am also adding a personal \
+      section where I will put random things like my traveling and other hobbies. ",
     category: "web",
     tags: ["Next.js", "Tailwind CSS"],
 
@@ -85,7 +85,7 @@ const themes = {
     statusCompleted: "bg-[hsl(100,40%,46%,0.1)] text-[hsl(100,40%,46%,0.6)] border-[hsl(100,40%,46%,0.2)]",
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(100,40%,46%)]",
-    headerComment: "/* active projects */",
+    headerComment: "/* personal projects */",
     cardBg: "bg-[hsl(0,0%,17%)]",
     pageBg: "bg-[hsl(0,0%,14%)]",
   },
@@ -99,7 +99,7 @@ const themes = {
     statusCompleted: "bg-[hsl(210,60%,62%,0.1)] text-[hsl(210,60%,62%,0.6)] border-[hsl(210,60%,62%,0.2)]",
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(210,60%,62%)]",
-    headerComment: "// active projects",
+    headerComment: "// personal projects",
     cardBg: "bg-[hsl(0,0%,17%)]",
     pageBg: "bg-[hsl(0,0%,14%)]",
   },
@@ -113,7 +113,7 @@ const themes = {
     statusCompleted: "bg-[hsl(270,60%,65%,0.1)] text-[hsl(270,60%,65%,0.6)] border-[hsl(270,60%,65%,0.2)]",
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(270,60%,65%)]",
-    headerComment: "# other projects",
+    headerComment: "# personal projects",
     cardBg: "bg-[hsl(0,0%,17%)]",
     pageBg: "bg-[hsl(0,0%,14%)]",
   },
@@ -151,11 +151,9 @@ const EmbeddedCard = ({ project, theme }: { project: Project; theme: typeof them
         </Badge>
       </div>
       {/* description*/}
-      <div className="pl-4 border-l border-green-400/10">
+      <div className="pl-4">
         <p className="text-xs text-muted-foreground leading-relaxed">
-          <span className="text-green-400/40">/* </span>
           {project.description}
-          <span className="text-green-400/40"> */</span>
         </p>
       </div>
       {/* tags */}
@@ -383,7 +381,7 @@ const Projects = () => {
                 <span className="text-[hsl(270,60%,65%)]">Other</span> Projects
               </>
             ) : (
-              "Projects"
+              "All Projects"
             )}
           </h1>
           <p className="text-muted-foreground">
@@ -393,7 +391,7 @@ const Projects = () => {
               ? "Modern web apps. Fun and easy to build."
               : filter === "other"
               ? "Other projects that aren't strictly embedded or web, but I still want to show and tell."
-              : "A mix of both my interests."}
+              : "The full overview of my projects."}
           </p>
         </div>
 
@@ -411,10 +409,10 @@ const Projects = () => {
           </button>
           <button
             onClick={() => setFilter("embedded")}
-            className={`font-mono text-xs px-3 py-1.5 border transition-all ${
+            className={`font-mono text-xs px-3 py-1.5 rounded-none border transition-all ${
               filter === "embedded"
-                ? "rounded-none border-accent bg-accent/10 text-accent"
-                : "rounded-md border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
             }`}
           >
             <span className="inline-flex items-center gap-1">
@@ -424,10 +422,10 @@ const Projects = () => {
           </button>
           <button
             onClick={() => setFilter("web")}
-            className={`font-mono text-xs px-3 py-1.5 border transition-all ${
+            className={`font-mono text-xs px-3 py-1.5 rounded-full border transition-all ${
               filter === "web"
-                ? "rounded-full border-[hsl(210,60%,62%)] bg-[hsl(210,60%,62%,0.1)] text-[hsl(210,60%,62%)]"
-                : "rounded-md border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+                ? "border-[hsl(210,60%,62%)] bg-[hsl(210,60%,62%,0.1)] text-[hsl(210,60%,62%)]"
+                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
             }`}
           >
             <span className="inline-flex items-center gap-1">
