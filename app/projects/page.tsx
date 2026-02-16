@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Cpu, Globe, ExternalLink, Github, Terminal, Code2 } from "lucide-react";
+import { Microchip, Globe, ExternalLink, Github, Terminal, Code2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 type ProjectCategory = "all" | "embedded" | "web" | "other";
@@ -302,7 +302,7 @@ const DefaultCard = ({ project, theme }: { project: Project; theme: typeof theme
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
           {project.category === "embedded" ? (
-            <Cpu className="h-4 w-4 text-accent shrink-0" />
+            <Microchip className="h-4 w-4 text-accent shrink-0" />
           ) : project.category === "web" ? (
             <Globe className="h-4 w-4 text-[hsl(210,60%,62%)] shrink-0" />
           ) : (
@@ -416,7 +416,7 @@ const Projects = () => {
             }`}
           >
             <span className="inline-flex items-center gap-1">
-              <Cpu className="h-3 w-3" />
+              <Microchip className="h-3 w-3" />
               {filter === "embedded" ? "#include <embedded>" : "embedded"}
             </span>
           </button>
