@@ -60,7 +60,7 @@ export default function ExperienceCard({ experience, isFirst }: ExperienceCardPr
     // other experience is grey 
     else {
       return {
-        company: "text-[hsl(0,0%,50%)]", 
+        company: "", 
         dot: isCurrent
           ? "bg-primary border-primary animate-pulse"
           : "bg-[hsl(0,0%,50%)]/20 border-[hsl(0,0%,50%)]"
