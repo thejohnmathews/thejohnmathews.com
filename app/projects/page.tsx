@@ -29,7 +29,7 @@ const projects: Project[] = [
     links: [{ label: "Repo", url: "https://github.com/thejohnmathews/luis-el-portero-2", icon: "github" }],
   },
   {
-    title: "johnmathews.dev",
+    title: "thejohnmathews.com",
     description:
       "My personal website built with Next.js and Tailwind CSS. I developed this site for fun to have a place to share my projects among other things I am interested in. \
       I knew I wanted the design to reflect both my web dev and embedded interests, hence the ui that changes based on the project category. I am also adding a personal \
@@ -38,7 +38,7 @@ const projects: Project[] = [
     tags: ["Next.js", "Tailwind CSS"],
 
     status: "active",
-    links: [{ label: "Repo", url: "https://github.com/thejohnmathews/johnmathews.dev", icon: "github" }],
+    links: [{ label: "Repo", url: "https://github.com/thejohnmathews/thejohnmathews.com", icon: "github" }],
   },
   {
     title: "Baby Bean PT Website",

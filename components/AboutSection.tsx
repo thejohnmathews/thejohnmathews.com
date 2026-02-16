@@ -15,7 +15,7 @@ export default function AboutSection() {
             <h3 className="text-sm font-semibold">Embedded Systems</h3>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Experience writing firmware for dedicated microcontrllers and SoC microchips in Embedded C and C++.
+            Experience writing firmware for dedicated microcontrollers and SoC microchips in Embedded C and C++.
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline" className="font-mono text-xs">
