@@ -4,8 +4,24 @@ import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "John Mathews",
+    url: "https://thejohnmathews.com",
+    jobTitle: "Software Developer",
+    sameAs: [
+      "https://github.com/thejohnmathews",
+      "https://linkedin.com/in/thejohnmathews",
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main className="container mx-auto max-w-3xl px-6 pt-28 pb-20">
         <div className="space-y-2">

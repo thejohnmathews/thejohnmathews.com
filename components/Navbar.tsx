@@ -26,7 +26,7 @@ export default function Navbar() {
           href="/"
           className="font-mono text-sm font-semibold text-primary tracking-wider hover:text-primary/80 transition-colors"
         >
-          ~/johnmathews.dev
+          ~/thejohnmathews.com
         </Link>
         <div className="hidden md:flex items-center gap-6">
           {mainNavItems.map((item) => (

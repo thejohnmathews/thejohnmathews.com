@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Compass, Camera, BookOpen } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Personal",
+  description:
+    "Personal interests, hobbies, and more about John Mathews beyond software development.",
+};
 
 export default function Personal() {
   return (
