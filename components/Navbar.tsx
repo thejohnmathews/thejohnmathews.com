@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const mainNavItems = [
   { label: "home", path: "/" },
@@ -52,6 +53,8 @@ export default function Navbar() {
               {item.label}();
             </Link>
           ))}
+          <div className="h-4 w-px bg-border" />
+          <ThemeToggle />
         </div>
 
         {/* mobile */}
@@ -92,6 +95,8 @@ export default function Navbar() {
                 {item.label}();
               </Link>
             ))}
+            <div className="h-px w-full bg-border my-1" />
+            <ThemeToggle />
           </div>
         </div>
       )}

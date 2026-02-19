@@ -282,12 +282,9 @@ const TravelCard = ({ travel, index }: { travel: TravelEntry; index: number }) =
   return (
     <div
       id={`travel-${travel.id}`}
-      className="scroll-mt-24 rounded-2xl border bg-[hsl(0,0%,20%)] overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/20"
+      className="scroll-mt-24 rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/20"
       style={{
         borderLeft: `4px solid ${colors.primary}`,
-        borderTop: "1px solid hsl(0,0%,28%)",
-        borderRight: "1px solid hsl(0,0%,28%)",
-        borderBottom: "1px solid hsl(0,0%,28%)",
       }}
     >
       {/* placeholder*/}
@@ -351,13 +348,13 @@ const TravelCard = ({ travel, index }: { travel: TravelEntry; index: number }) =
         </div>
 
         {/* deescription  */}
-        <p className="text-[hsl(30,5%,70%)] leading-relaxed">{travel.description}</p>
+        <p className="text-muted-foreground leading-relaxed">{travel.description}</p>
         {travel.highlights && travel.highlights.length > 0 && (
           <div className="space-y-3">
             <h4 className="text-sm font-semibold text-foreground">Highlights</h4>
             <ul className="space-y-2">
               {travel.highlights.map((highlight, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-[hsl(30,5%,70%)]">
+                <li key={idx} className="flex items-start gap-3 text-sm text-muted-foreground">
                   <span
                     className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
                     style={{ backgroundColor: colors.primary }}
@@ -415,17 +412,17 @@ const Travels = () => {
       : Object.entries(travelsByContinent).filter(([continent]) => continent === filter);
 
   return (
-    <div className="min-h-screen bg-[hsl(0,0%,16%)] transition-colors duration-500">
+    <div className="min-h-screen bg-background transition-colors duration-500">
       <Navbar />
 
       {/* map*/}
-      <section className="relative w-full h-[700px] bg-[hsl(0,0%,14%)] border-b border-border">
+      <section className="relative w-full h-[700px] bg-muted border-b border-border">
         {/* header on map */}
         <div
           className="absolute top-0 left-0 right-0 z-10 px-8 pt-24 pb-8 pointer-events-none"
           style={{
             background:
-              "linear-gradient(to bottom, hsl(0,0%,16%,0.95) 0%, hsl(0,0%,16%,0.7) 70%, transparent 100%)",
+              "linear-gradient(to bottom, hsl(var(--background) / 0.95) 0%, hsl(var(--background) / 0.7) 70%, transparent 100%)",
             fontFamily: "'Inter', sans-serif",
           }}
         >
@@ -436,7 +433,7 @@ const Travels = () => {
           <h1 className="text-4xl font-bold tracking-tight mb-3">
             <span className="text-[hsl(15,70%,60%)]">Travels</span>
           </h1>
-          <p className="text-lg text-[hsl(30,5%,70%)]">Click any location to see my notes.</p>
+          <p className="text-lg text-muted-foreground">Click any location to see my notes.</p>
         </div>
         <WorldMap travels={travels} onMarkerClick={handleMarkerClick} filter={filter} />
       </section>
@@ -450,7 +447,7 @@ const Travels = () => {
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all text-sm font-medium ${
                 filter === "all"
                   ? "border-[hsl(15,70%,60%)] bg-[hsl(15,70%,60%,0.15)] text-[hsl(15,70%,60%)]"
-                  : "border-[hsl(0,0%,28%)] text-muted-foreground hover:text-foreground hover:border-[hsl(0,0%,35%)]"
+                  : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
               }`}
             >
               <Compass className="h-4 w-4" />
@@ -465,7 +462,7 @@ const Travels = () => {
                   className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all text-sm font-medium ${
                     filter === continent
                       ? `bg-opacity-15`
-                      : "border-[hsl(0,0%,28%)] text-muted-foreground hover:text-foreground hover:border-[hsl(0,0%,35%)]"
+                      : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
                   }`}
                   style={
                     filter === continent

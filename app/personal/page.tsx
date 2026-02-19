@@ -5,7 +5,7 @@ import { Compass, Camera, BookOpen } from "lucide-react";
 
 export default function Personal() {
   return (
-    <div className="min-h-screen bg-[hsl(0,0%,16%)] transition-colors duration-500">
+    <div className="min-h-screen bg-background transition-colors duration-500">
       <Navbar />
 
       {/* header */}
@@ -30,7 +30,7 @@ export default function Personal() {
           </p>
           <Link
             href="/travels"
-            className="inline-flex items-center gap-2 px-6 py-1 bg-primary text-[hsl(0,0%,16%)] rounded-lg font-medium hover:bg-primary/90 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-1 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
           >
             View Travel Map
             <span className="text-lg">→</span>

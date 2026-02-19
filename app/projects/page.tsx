@@ -86,8 +86,8 @@ const themes = {
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(100,40%,46%)]",
     headerComment: "/* personal projects */",
-    cardBg: "bg-[hsl(0,0%,17%)]",
-    pageBg: "bg-[hsl(0,0%,14%)]",
+    cardBg: "bg-card",
+    pageBg: "bg-background",
   },
   web: {
     accent: "text-[hsl(210,60%,62%)]",
@@ -100,8 +100,8 @@ const themes = {
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(210,60%,62%)]",
     headerComment: "// personal projects",
-    cardBg: "bg-[hsl(0,0%,17%)]",
-    pageBg: "bg-[hsl(0,0%,14%)]",
+    cardBg: "bg-card",
+    pageBg: "bg-background",
   },
   other: {
     accent: "text-[hsl(270,60%,65%)]",
@@ -114,8 +114,8 @@ const themes = {
     statusPaused: "bg-muted text-muted-foreground border-border",
     linkHover: "hover:text-[hsl(270,60%,65%)]",
     headerComment: "# personal projects",
-    cardBg: "bg-[hsl(0,0%,17%)]",
-    pageBg: "bg-[hsl(0,0%,14%)]",
+    cardBg: "bg-card",
+    pageBg: "bg-background",
   },
   all: {
     accent: "text-primary",
