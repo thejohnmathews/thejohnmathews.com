@@ -1,0 +1,219 @@
+{
+  "Navbar": {
+    "home": "home",
+    "projects": "projects",
+    "experience": "experience",
+    "personal": "personal",
+    "siteName": "~/thejohnmathews.com"
+  },
+  "Home": {
+    "comment": "// welcome",
+    "greeting": "Hello, I'm",
+    "name": "John",
+    "intro": "I have programming experience in embedded systems and web developement. Currently building a couple small projects here and there!"
+  },
+  "TerminalHero": {
+    "overview": "~/overview",
+    "role0": "embedded software engineer",
+    "role1": "full stack developer"
+  },
+  "About": {
+    "embeddedTitle": "Embedded Systems",
+    "embeddedDesc": "Experience writing firmware for dedicated microcontrollers and SoC microchips in Embedded C and C++.",
+    "webTitle": "Full Stack Web",
+    "webDesc": "Experience building modern web applications in all layers of the stack, primarily using NextJS and Postgres.",
+    "viewProjects": "view personal projects"
+  },
+  "Experience": {
+    "comment": "// working life so far",
+    "title": "Experience",
+    "subtitle": "Building software, from embedded systems to web applications.",
+    "techHeader": "char* techExperience = ",
+    "techHeaderSuffix": "(char*)malloc(NUM_EXP * sizeof(char*));",
+    "otherHeader": "const ",
+    "otherHeaderSuffix": "OTHER_EXPERIENCE = 2;",
+    "current": "CURRENT",
+    "present": "Present"
+  },
+  "ExperienceData": {
+    "tech": [
+      {
+        "company": "Fastbreak AI",
+        "location": "Charlotte, NC",
+        "type": "web",
+        "roles": [
+          {
+            "title": "Junior Software Engineer",
+            "startDate": "2025-10",
+            "endDate": null,
+            "description": "Developing a full-stack web application for event ticketing and management. Working on the entire stack from database design to frontend development, utilizing Next.js and Postgres.",
+            "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Jira"]
+          }
+        ],
+        "industry": "tech"
+      },
+      {
+        "company": "FastFetch",
+        "location": "Seneca, SC",
+        "type": "embedded",
+        "roles": [
+          {
+            "title": "Junior Embedded Software Engineer",
+            "startDate": "2023-08",
+            "endDate": "2024-09",
+            "description": "Promoted to contract role developing embedded systems while in school. Worked on porting all 8052 ASM firmware to Embedded C to improve maintainability and add new features.",
+            "technologies": ["Embedded C", "ASM", "8052 Microcontroller", "Bare Metal", "Oscilloscope", "Serial/Infared Communication"]
+          },
+          {
+            "title": "Embedded Software Engineering Intern",
+            "startDate": "2023-05",
+            "endDate": "2023-08",
+            "description": "Internship focused on embedded systems development. Ported a proprietary embedded system in ASM to a protype system in Embedded C.",
+            "technologies": ["Embedded C", "ASM", "ATmega Microcontrollers", "RS-232 & RS-485", "Bootloaders"]
+          }
+        ],
+        "industry": "tech"
+      }
+    ],
+    "other": [
+      {
+        "company": "Ministerio de Educación de España",
+        "location": "CEIP Eugenio Maria de Hostos, Madrid, Spain",
+        "roles": [
+          {
+            "title": "Auxiliar de Conversación",
+            "startDate": "2024-09",
+            "endDate": "2025-07",
+            "description": "Assisted in teaching English at a public primary school in Madrid. Taught conversational English to students aged 3-10, helping to enhance their language skills and cultural understanding.",
+            "highlights": [
+              "Learned A2 Castilian Spanish in 1 year",
+              "Enhanced cross-cultural communication"
+            ]
+          }
+        ],
+        "industry": "education"
+      },
+      {
+        "company": "Carowinds",
+        "location": "Charlotte, NC / Fort Mill, SC",
+        "roles": [
+          {
+            "title": "Aquatics Supervisor",
+            "startDate": "2020-01",
+            "endDate": "2022-08",
+            "description": "Supervised aquatics operations and lifeguard staff at a major amusement park. Managed team schedules, conducted safety training, and ensured guest safety across multiple water attractions.",
+            "highlights": [
+              "3 years of leadership experience",
+              "Managed a team of 20+ lifeguards every day",
+              "Ensured the safety and customer satisfaction of thousands of guests each season"
+            ]
+          },
+          {
+            "title": "Lifeguard and Certified Trainer",
+            "startDate": "2018-05",
+            "endDate": "2020-01",
+            "description": ""
+          }
+        ],
+        "industry": "other"
+      }
+    ]
+  },
+  "Projects": {
+    "allComment": "// personal projects",
+    "embeddedComment": "/* personal projects */",
+    "webComment": "// personal projects",
+    "otherComment": "# personal projects",
+    "allProjects": "All Projects",
+    "embeddedProjects": "Embedded",
+    "webProjects": "Web",
+    "otherProjects": "Other",
+    "allDesc": "The full overview of my projects.",
+    "embeddedDesc": "Low-level systems. Perfect for seeing my code come alive.",
+    "webDesc": "Modern web apps. Fun and easy to build.",
+    "otherDesc": "Other projects that aren't strictly embedded or web, but I still want to show and tell.",
+    "embeddedFilterActive": "#include <embedded>",
+    "webFilterActive": "<Web />",
+    "otherFilterActive": "# other"
+  },
+  "ProjectsData": [
+    {
+      "title": "Luis El Portero",
+      "description": "I made an access control system for my apartment door in Madrid after I got locked out once. It used an ESP8266 microcontroller continuously monitoring an endpoint on a server I set up. Whenever I sent the secret to the endpoint from my phone, the microcontroller would trigger the motor to hit the button to buzz me in.",
+      "category": "embedded",
+      "tags": ["C++", "ESP8266", "IoT"],
+      "status": "completed",
+      "links": [{"label": "Repo", "url": "https://github.com/thejohnmathews/luis-el-portero-2", "icon": "github"}]
+    },
+    {
+      "title": "thejohnmathews.com",
+      "description": "My personal website built with Next.js and Tailwind CSS. I developed this site for fun to have a place to share my projects among other things I am interested in. I knew I wanted the design to reflect both my web dev and embedded interests, hence the ui that changes based on the project category. I am also adding a personal section where I will put random things like my traveling and other hobbies.",
+      "category": "web",
+      "tags": ["Next.js", "Tailwind CSS"],
+      "status": "active",
+      "links": [{"label": "Repo", "url": "https://github.com/thejohnmathews/thejohnmathews.com", "icon": "github"}]
+    },
+    {
+      "title": "Baby Bean PT Website",
+      "description": "Baby Bean PT is a small businees started by my mother that offers telehealth physical therapy sessions for premature and underdevloped babes in the Charlote area. To kick start her businees, I built her a website so that she could have an online presense and a way for potential clients to submit requests for appointments.",
+      "category": "web",
+      "tags": ["Next.js", "Tailwind CSS", "Vercel", "Resend"],
+      "status": "completed",
+      "links": [{"label": "Website", "url": "https://babybeanpt.com", "icon": "external"}]
+    },
+    {
+      "title": "HitSkill",
+      "description": "HitSkill is a mobile app that connects cheer atheletes with coaches (professional/student athletes) for private lesstons. This would allow student atheletes to be able to make money on the side easier or event help gyms post private lessons as well. So far I have built a static website for it and a skeleton of the app in Flutter/Dart. I would love to finish buliding it and start a beta test with my old cheer team.",
+      "category": "other",
+      "tags": ["Mobile", "Flutter", "Android/iOS"],
+      "status": "paused",
+      "links": [{"label": "Website", "url": "https://hitskill.app", "icon": "external"}]
+    },
+    {
+      "title": "Metro de Madrid CLI",
+      "description": "A C++ command-line tool that displays a live ASCII art map of the Madrid Metro system in the terminal. Shows real-time train positions and station status using the Metro de Madrid API.",
+      "category": "other",
+      "tags": ["C++", "CLI", "API Scrapimg"],
+      "status": "active",
+      "links": [{"label": "Repo", "url": "https://github.com/thejohnmathews/metro-de-madrid-CLI", "icon": "github"}]
+    }
+  ],
+  "Personal": {
+    "title": "Personal",
+    "subtitle": "Random things other than development.",
+    "travelsTitle": "Travels",
+    "travelsDesc": "Interactive map showing places I have been so far, and my takes on each place.",
+    "viewTravelMap": "View Travel Map"
+  },
+  "Travels": {
+    "journalLabel": "Travel Journal",
+    "title": "Travels",
+    "subtitle": "Click any location to see my notes.",
+    "allContinents": "All Continents",
+    "now": "Now",
+    "present": "Present"
+  },
+  "ContinentNames": {
+    "Europe": "Europe",
+    "Africa": "Africa",
+    "NorthAmerica": "North America",
+    "Asia": "Asia",
+    "SouthAmerica": "South America",
+    "Oceania": "Oceania"
+  },
+  "Footer": {
+    "builtWith": "built with next.js + typescript + tailwind"
+  },
+  "Metadata": {
+    "siteTitle": "thejohnmathews.com",
+    "siteDescription": "John Mathews — software developer with experience in embedded systems and web development. Explore projects, work experience, and more.",
+    "experienceTitle": "Experience",
+    "experienceDescription": "Professional work experience of John Mathews.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "A showcase of software projects by John Mathews, spanning embedded systems, web development, and more.",
+    "personalTitle": "Personal",
+    "personalDescription": "Personal interests, hobbies, and more about John Mathews beyond software development.",
+    "travelsTitle": "Travels",
+    "travelsDescription": "Travel journal by John Mathews, places visited and experiences."
+  }
+}

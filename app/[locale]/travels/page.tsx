@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import {useState, useMemo} from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { MapPin, Calendar, Compass } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import {Compass} from "lucide-react";
+import {Badge} from "@/components/ui/badge";
 import travelsData from "@/data/travels.json";
+import {useTranslations, useLocale} from 'next-intl';
 import {
   ComposableMap,
   Geographies,
@@ -24,7 +25,7 @@ interface TravelEntry {
   location: string;
   country: string;
   continent: Continent;
-  dateRange: { start: string; end: string | null };
+  dateRange: {start: string; end: string | null};
   description: string;
   highlights?: string[];
   tags?: string[];
@@ -35,7 +36,6 @@ interface TravelEntry {
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-// Continent color scheme
 const continentColors = {
   Europe: {
     primary: "hsl(210,70%,55%)",
@@ -71,16 +71,6 @@ const continentColors = {
 
 const travels: TravelEntry[] = travelsData as TravelEntry[];
 
-// continent display names
-const continentDisplayNames: Record<Continent, string> = {
-  Europe: "Europe",
-  Africa: "Africa",
-  NorthAmerica: "North America",
-  Asia: "Asia",
-  SouthAmerica: "South America",
-  Oceania: "Oceania",
-};
-
 const WorldMap = ({
   travels,
   onMarkerClick,
@@ -99,14 +89,10 @@ const WorldMap = ({
     ? travels.filter((t) => t.continent !== "NorthAmerica")
     : travels.filter((t) => t.continent === filter && t.continent !== "NorthAmerica");
 
-  // cluster markers based on proximity and zoom level
   const markerGroups = useMemo(() => {
-    const groups: { id: string; position: [number, number]; travels: TravelEntry[] }[] = [];
+    const groups: {id: string; position: [number, number]; travels: TravelEntry[]}[] = [];
     const processed = new Set<string>();
 
-    // low zoom (≤ 3), cluster within 2 degrees (aggressive)
-    // medium zoom (3-8), cluster within 0.5 degrees
-    // high zoom (> 8), cluster within 0.05 degree (no clustering)
     const threshold = zoom <= 3 ? 2 : zoom <= 8 ? 0.5 : 0.05;
 
     filteredTravels.forEach((travel) => {
@@ -135,37 +121,28 @@ const WorldMap = ({
     return groups;
   }, [filteredTravels, zoom]);
 
-  const handleClusterClick = (group: { id: string; position: [number, number]; travels: TravelEntry[] }) => {
+  const handleClusterClick = (group: {id: string; position: [number, number]; travels: TravelEntry[]}) => {
     if (group.travels.length > 1) {
-
-      // bounds of the cluster
       const lons = group.travels.map(t => t.coordinates[0]);
       const lats = group.travels.map(t => t.coordinates[1]);
       const centerLon = (Math.min(...lons) + Math.max(...lons)) / 2;
       const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
 
-      // zoom in
       setCenter([centerLon, centerLat]);
       setZoom(15);
     } else {
-      // single
       onMarkerClick(group.travels[0]);
     }
   };
 
-  const handleResetView = () => {
-    setCenter([15, 35]);
-    setZoom(2.5);
-  };
-
-  const handleMoveEnd = (position: { coordinates: [number, number]; zoom: number }) => {
+  const handleMoveEnd = (position: {coordinates: [number, number]; zoom: number}) => {
     setCenter(position.coordinates);
     setZoom(position.zoom);
   };
 
   return (
     <div className="relative w-full h-full">
-      <ComposableMap projection="geoMercator" style={{ width: "100%", height: "100%" }}>
+      <ComposableMap projection="geoMercator" style={{width: "100%", height: "100%"}}>
         <ZoomableGroup
           center={center}
           zoom={zoom}
@@ -175,7 +152,7 @@ const WorldMap = ({
           translateExtent={[[-200, -100], [800, 600]]}
         >
         <Geographies geography={geoUrl}>
-          {({ geographies }) =>
+          {({geographies}) =>
             geographies.map((geo: any) => {
               const isVisited = visitedCountries.includes(geo.properties.ISO_A3);
               const visitedTravel = isVisited
@@ -194,14 +171,14 @@ const WorldMap = ({
                   stroke="hsl(0,0%,30%)"
                   strokeWidth={0.5}
                   style={{
-                    default: { outline: "none" },
+                    default: {outline: "none"},
                     hover: {
                       outline: "none",
                       fill: isVisited && visitedTravel
                         ? continentColors[visitedTravel.continent].primary
                         : "hsl(0,0%,26%)",
                     },
-                    pressed: { outline: "none" },
+                    pressed: {outline: "none"},
                   }}
                 />
               );
@@ -221,7 +198,6 @@ const WorldMap = ({
                 onMouseEnter={() => !isMulti && setHoveredMarker(group.id)}
                 onMouseLeave={() => setHoveredMarker(null)}
               >
-                {/* cluster marker with ring  */}
                 {isMulti ? (
                   <g onClick={() => handleClusterClick(group)}>
                     <circle
@@ -239,7 +215,6 @@ const WorldMap = ({
                     />
                   </g>
                 ) : (
-                  /* single */
                   <g>
                     <circle
                       r={0.5}
@@ -247,7 +222,6 @@ const WorldMap = ({
                       className="transition-all hover:scale-150"
                       onClick={() => handleClusterClick(group)}
                     />
-                    {/* label on hover */}
                     {isHovered && (
                       <text
                         x={2}
@@ -276,105 +250,109 @@ const WorldMap = ({
   );
 };
 
-const TravelCard = ({ travel, index }: { travel: TravelEntry; index: number }) => {
+const TravelAccordionItem = ({travel}: {travel: TravelEntry}) => {
+  const [isOpen, setIsOpen] = useState(false);
   const colors = continentColors[travel.continent];
+  const t = useTranslations('Travels');
+  const locale = useLocale();
+
+  const dateLabel = new Date(travel.dateRange.start).toLocaleDateString(locale, {
+    month: "short",
+    year: "numeric",
+  });
+  const endLabel = travel.dateRange.end
+    ? new Date(travel.dateRange.end).toLocaleDateString(locale, {
+        month: "short",
+        year: "numeric",
+      })
+    : t('present');
 
   return (
     <div
       id={`travel-${travel.id}`}
-      className="scroll-mt-24 rounded-2xl border bg-[hsl(0,0%,20%)] overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/20"
-      style={{
-        borderLeft: `4px solid ${colors.primary}`,
-        borderTop: "1px solid hsl(0,0%,28%)",
-        borderRight: "1px solid hsl(0,0%,28%)",
-        borderBottom: "1px solid hsl(0,0%,28%)",
-      }}
+      className="scroll-mt-24 border-b border-[hsl(0,0%,24%)]"
     >
-      {/* placeholder*/}
-      <div
-        className="h-48 relative"
-        style={{
-          background: `linear-gradient(135deg, ${colors.primary}, ${colors.marker})`,
-        }}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center gap-3 py-3 px-4 text-left hover:bg-[hsl(0,0%,20%)] transition-colors"
       >
-        <div className="absolute top-4 left-4 flex items-center gap-2">
-          <Badge
-            className="text-white border-0 backdrop-blur-sm"
-            style={{ backgroundColor: "rgba(0,0,0,0.3)" }}
-          >
-            #{index + 1}
-          </Badge>
-          <Badge
-            className="text-white border-0 backdrop-blur-sm"
-            style={{ backgroundColor: "rgba(0,0,0,0.3)" }}
-          >
-            {travel.continent}
-          </Badge>
-        </div>
+        <span
+          className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+          style={{backgroundColor: colors.primary}}
+        />
+        <span className="font-medium text-foreground flex-1 min-w-0 truncate">
+          {travel.title}
+        </span>
         {travel.status === "current" && (
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-white/20 text-white border-0 backdrop-blur-sm">Currently Here</Badge>
-          </div>
+          <Badge className="bg-[hsl(15,70%,60%,0.15)] text-[hsl(15,70%,60%)] border-0 text-xs flex-shrink-0">
+            {t('now')}
+          </Badge>
         )}
-        {travel.status === "upcoming" && (
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-white/20 text-white border-0 backdrop-blur-sm">Coming Soon</Badge>
+        <span className="text-sm text-muted-foreground flex-shrink-0 hidden sm:inline">
+          {travel.country}
+        </span>
+        <span className="text-xs text-muted-foreground flex-shrink-0 w-28 text-right hidden sm:inline">
+          {dateLabel} — {endLabel}
+        </span>
+        <svg
+          className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isOpen && (
+        <div className="px-4 pb-4 pl-9 space-y-3">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground sm:hidden">
+            <span>{travel.country}</span>
+            <span>{dateLabel} — {endLabel}</span>
           </div>
-        )}
-      </div>
-
-      {/* content */}
-      <div className="p-6 space-y-4" style={{ fontFamily: "'Inter', sans-serif" }}>
-        <div className="flex items-center gap-2 text-sm" style={{ color: colors.primary }}>
-          <MapPin className="h-4 w-4" />
-          <span className="font-medium">
-            {travel.location}, {travel.country}
-          </span>
-        </div>
-
-        {/* title and date */}
-        <h3 className="text-2xl font-bold text-foreground">{travel.title}</h3>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Calendar className="h-4 w-4" />
-          <span>
-            {new Date(travel.dateRange.start).toLocaleDateString("en-US", {
-              month: "short",
-              year: "numeric",
-            })}{" "}
-            {travel.dateRange.end
-              ? `- ${new Date(travel.dateRange.end).toLocaleDateString("en-US", {
-                  month: "short",
-                  year: "numeric",
-                })}`
-              : "- Present"}
-          </span>
-        </div>
-
-        {/* deescription  */}
-        <p className="text-[hsl(30,5%,70%)] leading-relaxed">{travel.description}</p>
-        {travel.highlights && travel.highlights.length > 0 && (
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold text-foreground">Highlights</h4>
-            <ul className="space-y-2">
+          <p className="text-sm text-[hsl(30,5%,70%)] leading-relaxed">
+            {travel.description}
+          </p>
+          {travel.highlights && travel.highlights.length > 0 && (
+            <ul className="space-y-1.5">
               {travel.highlights.map((highlight, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-sm text-[hsl(30,5%,70%)]">
+                <li key={idx} className="flex items-start gap-2 text-sm text-[hsl(30,5%,70%)]">
                   <span
                     className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: colors.primary }}
+                    style={{backgroundColor: colors.primary}}
                   />
                   <span>{highlight}</span>
                 </li>
               ))}
             </ul>
-          </div>
-        )}
-      </div>
+          )}
+          {travel.tags && travel.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {travel.tags.map((tag) => (
+                <Badge
+                  key={tag}
+                  className="text-xs border-0"
+                  style={{
+                    backgroundColor: `${colors.primary}15`,
+                    color: colors.primary,
+                  }}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 const Travels = () => {
   const [filter, setFilter] = useState<TravelFilter>("all");
+  const t = useTranslations('Travels');
+  const ct = useTranslations('ContinentNames');
 
   const handleMarkerClick = (travel: TravelEntry) => {
     const element = document.getElementById(`travel-${travel.id}`);
@@ -386,17 +364,15 @@ const Travels = () => {
     }
   };
 
-  // group travels by continent and sort by date
   const travelsByContinent = useMemo(() => {
     const grouped = travels
-      .filter((t) => t.continent !== "NorthAmerica") // hiding na for now
+      .filter((t) => t.continent !== "NorthAmerica")
       .reduce((acc, travel) => {
         if (!acc[travel.continent]) acc[travel.continent] = [];
         acc[travel.continent].push(travel);
         return acc;
       }, {} as Record<Continent, TravelEntry[]>);
 
-    // oldest date first -> changing to ranking based later
     Object.keys(grouped).forEach((continent) => {
       grouped[continent as Continent].sort(
         (a, b) => new Date(a.dateRange.start).getTime() - new Date(b.dateRange.start).getTime()
@@ -406,7 +382,6 @@ const Travels = () => {
     return grouped;
   }, []);
 
-  // show continents with data
   const availableContinents = Object.keys(travelsByContinent) as Continent[];
 
   const filteredContinents =
@@ -418,9 +393,8 @@ const Travels = () => {
     <div className="min-h-screen bg-[hsl(0,0%,16%)] transition-colors duration-500">
       <Navbar />
 
-      {/* map*/}
+      {/* map */}
       <section className="relative w-full h-[700px] bg-[hsl(0,0%,14%)] border-b border-border">
-        {/* header on map */}
         <div
           className="absolute top-0 left-0 right-0 z-10 px-8 pt-24 pb-8 pointer-events-none"
           style={{
@@ -431,18 +405,18 @@ const Travels = () => {
         >
           <div className="flex items-center gap-2 text-[hsl(15,70%,60%)] mb-3">
             <Compass className="h-5 w-5" />
-            <p className="text-sm font-medium">Travel Journal</p>
+            <p className="text-sm font-medium">{t('journalLabel')}</p>
           </div>
           <h1 className="text-4xl font-bold tracking-tight mb-3">
-            <span className="text-[hsl(15,70%,60%)]">Travels</span>
+            <span className="text-[hsl(15,70%,60%)]">{t('title')}</span>
           </h1>
-          <p className="text-lg text-[hsl(30,5%,70%)]">Click any location to see my notes.</p>
+          <p className="text-lg text-[hsl(30,5%,70%)]">{t('subtitle')}</p>
         </div>
         <WorldMap travels={travels} onMarkerClick={handleMarkerClick} filter={filter} />
       </section>
 
-      {/* filters*/}
-      <section className="py-8 px-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* filters */}
+      <section className="py-8 px-6" style={{fontFamily: "'Inter', sans-serif"}}>
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-wrap gap-2">
             <button
@@ -454,7 +428,7 @@ const Travels = () => {
               }`}
             >
               <Compass className="h-4 w-4" />
-              All Continents
+              {t('allContinents')}
             </button>
             {availableContinents.map((continent) => {
               const colors = continentColors[continent as Continent];
@@ -479,9 +453,9 @@ const Travels = () => {
                 >
                   <div
                     className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: colors.primary }}
+                    style={{backgroundColor: colors.primary}}
                   />
-                  {continentDisplayNames[continent]}
+                  {ct(continent)}
                 </button>
               );
             })}
@@ -489,20 +463,20 @@ const Travels = () => {
         </div>
       </section>
 
-      {/* continent content -> cards for now. dont really want cards */}
-      <section className="px-6 pb-12" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* continent content */}
+      <section className="px-6 pb-12" style={{fontFamily: "'Inter', sans-serif"}}>
         <div className="container mx-auto max-w-4xl space-y-16">
           {filteredContinents.map(([continent, entries]) => (
             <div key={continent} className="space-y-6">
               <h2
                 className="text-3xl font-bold"
-                style={{ color: continentColors[continent as Continent].primary }}
+                style={{color: continentColors[continent as Continent].primary}}
               >
-                {continent}
+                {ct(continent as Continent)}
               </h2>
               <div className="space-y-6">
-                {entries.map((travel, index) => (
-                  <TravelCard key={travel.id} travel={travel} index={index} />
+                {(entries as TravelEntry[]).map((travel) => (
+                  <TravelAccordionItem key={travel.id} travel={travel} />
                 ))}
               </div>
             </div>

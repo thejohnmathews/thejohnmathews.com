@@ -1,23 +1,25 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-
-const mainNavItems = [
-  { label: "home", path: "/" },
-  { label: "projects", path: "/projects" },
-  { label: "experience", path: "/experience" },
-];
-
-const personalNavItems = [
-  { label: "personal", path: "/personal" },
-];
+import {Link, usePathname} from '@/i18n/navigation';
+import {useTranslations} from 'next-intl';
+import {useState} from "react";
+import {Menu, X} from "lucide-react";
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const t = useTranslations('Navbar');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const mainNavItems = [
+    {label: t('home'), path: "/" as const},
+    {label: t('projects'), path: "/projects" as const},
+    {label: t('experience'), path: "/experience" as const},
+  ];
+
+  const personalNavItems = [
+    {label: t('personal'), path: "/personal" as const},
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
@@ -26,7 +28,7 @@ export default function Navbar() {
           href="/"
           className="font-mono text-sm font-semibold text-primary tracking-wider hover:text-primary/80 transition-colors"
         >
-          ~/thejohnmathews.com
+          {t('siteName')}
         </Link>
         <div className="hidden md:flex items-center gap-6">
           {mainNavItems.map((item) => (
@@ -52,6 +54,8 @@ export default function Navbar() {
               {item.label}();
             </Link>
           ))}
+          <div className="h-4 w-px bg-border" />
+          <LanguageSwitcher />
         </div>
 
         {/* mobile */}
@@ -66,7 +70,6 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-border bg-background">
           <div className="container mx-auto px-6 py-4 flex flex-col gap-3">
-            {/* Main navigation items */}
             {mainNavItems.map((item) => (
               <Link
                 key={item.path}
@@ -92,6 +95,8 @@ export default function Navbar() {
                 {item.label}();
               </Link>
             ))}
+            <div className="h-px w-full bg-border my-1" />
+            <LanguageSwitcher />
           </div>
         </div>
       )}

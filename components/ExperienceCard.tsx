@@ -1,5 +1,8 @@
-import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
+"use client";
+
+import {Badge} from "@/components/ui/badge";
+import {MapPin} from "lucide-react";
+import {useTranslations, useLocale} from 'next-intl';
 
 interface Role {
   title: string;
@@ -21,46 +24,43 @@ interface ExperienceCardProps {
   isFirst: boolean;
 }
 
-// function to format date ranges
-function formatDateRange(start: string, end: string | null): string {
-  const formatDate = (date: string) => {
-    const [year, month] = date.split("-");
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return `${monthNames[parseInt(month) - 1]} ${year}`;
+export default function ExperienceCard({experience, isFirst}: ExperienceCardProps) {
+  const t = useTranslations('Experience');
+  const locale = useLocale();
+
+  const formatDateRange = (start: string, end: string | null): string => {
+    const formatDate = (date: string) => {
+      const [year, month] = date.split("-");
+      const d = new Date(parseInt(year), parseInt(month) - 1);
+      return d.toLocaleDateString(locale, {month: 'short', year: 'numeric'});
+    };
+
+    const startFormatted = formatDate(start);
+    const endFormatted = end ? formatDate(end) : t('present');
+
+    return `${startFormatted} - ${endFormatted}`;
   };
 
-  const startFormatted = formatDate(start);
-  const endFormatted = end ? formatDate(end) : "Present";
-
-  return `${startFormatted} - ${endFormatted}`;
-}
-
-export default function ExperienceCard({ experience, isFirst }: ExperienceCardProps) {
   const isCurrent = experience.roles[0].endDate === null;
 
-  // determine colors based on work type
   const getColors = () => {
-    // web is blue
     if (experience.type === "web") {
       return {
-        company: "text-[hsl(210,60%,62%)]", 
+        company: "text-[hsl(210,60%,62%)]",
         dot: isCurrent
           ? "bg-primary border-primary animate-pulse"
           : "bg-[hsl(210,60%,62%)]/20 border-[hsl(210,60%,62%)]"
       };
-    // embedded is green  
     } else if (experience.type === "embedded") {
       return {
-        company: "text-[hsl(100,40%,46%)]", 
+        company: "text-[hsl(100,40%,46%)]",
         dot: isCurrent
           ? "bg-primary border-primary animate-pulse"
           : "bg-[hsl(100,40%,46%)]/20 border-[hsl(100,40%,46%)]"
       };
-    }
-    // other experience is grey 
-    else {
+    } else {
       return {
-        company: "", 
+        company: "",
         dot: isCurrent
           ? "bg-primary border-primary animate-pulse"
           : "bg-[hsl(0,0%,50%)]/20 border-[hsl(0,0%,50%)]"
@@ -72,11 +72,9 @@ export default function ExperienceCard({ experience, isFirst }: ExperienceCardPr
 
   return (
     <div className="relative pl-8">
-      {/* timeline dot */}
       <div className={`absolute -left-[5px] top-2 w-3 h-3 rounded-full border-2 ${colors.dot}`} />
 
       <div className="rounded-lg border border-border bg-card p-5 space-y-4 transition-colors hover:border-primary/20">
-        {/* header */}
         <div className="flex items-start justify-between gap-4">
           <div>
             <h3 className={`text-lg font-semibold ${colors.company}`}>{experience.company}</h3>
@@ -87,12 +85,11 @@ export default function ExperienceCard({ experience, isFirst }: ExperienceCardPr
           </div>
           {isCurrent && (
             <Badge className="bg-primary/20 text-primary border-primary/30 font-mono text-[10px]">
-              CURRENT
+              {t('current')}
             </Badge>
           )}
         </div>
 
-        {/* role */}
         {experience.roles.map((role, idx) => (
           <div key={idx} className={idx > 0 ? "pl-4 border-l-2 border-border" : ""}>
             <div className="flex items-start justify-between gap-4">
@@ -106,7 +103,6 @@ export default function ExperienceCard({ experience, isFirst }: ExperienceCardPr
               {role.description}
             </p>
 
-            {/* highlight */}
             {role.highlights && role.highlights.length > 0 && (
               <ul className="mt-2 space-y-1">
                 {role.highlights.map((highlight, i) => (
@@ -118,7 +114,6 @@ export default function ExperienceCard({ experience, isFirst }: ExperienceCardPr
               </ul>
             )}
 
-            {/* tech */}
             {role.technologies && role.technologies.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mt-3">
                 {role.technologies.map((tech) => (

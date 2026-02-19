@@ -1,8 +1,11 @@
-import { Microchip, Globe, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import {Microchip, Globe, ArrowRight} from "lucide-react";
+import {Link} from '@/i18n/navigation';
+import {Badge} from "@/components/ui/badge";
+import {getTranslations} from 'next-intl/server';
 
-export default function AboutSection() {
+export default async function AboutSection() {
+  const t = await getTranslations('About');
+
   return (
     <section className="space-y-8">
       <div className="grid gap-8 md:grid-cols-2">
@@ -12,10 +15,10 @@ export default function AboutSection() {
             <div className="flex h-9 w-9 items-center justify-center">
               <Microchip className="h-4 w-4 text-[hsl(100,40%,46%)]" />
             </div>
-            <h3 className="text-sm font-semibold">Embedded Systems</h3>
+            <h3 className="text-sm font-semibold">{t('embeddedTitle')}</h3>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Experience writing firmware for dedicated microcontrollers and SoC microchips in Embedded C and C++.
+            {t('embeddedDesc')}
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline" className="font-mono text-xs">
@@ -45,10 +48,10 @@ export default function AboutSection() {
             <div className="flex h-9 w-9 items-center justify-center">
               <Globe className="h-4 w-4 text-[hsl(210,60%,62%)]" />
             </div>
-            <h3 className="text-sm font-semibold">Full Stack Web</h3>
+            <h3 className="text-sm font-semibold">{t('webTitle')}</h3>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Experience building modern web applications in all layers of the stack, primarily using NextJS and Postgres.
+            {t('webDesc')}
           </p>
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline" className="font-mono text-xs">
@@ -75,7 +78,7 @@ export default function AboutSection() {
           href="/projects"
           className="group inline-flex items-center gap-2 font-mono text-sm text-primary transition-transform hover:translate-x-1"
         >
-          view personal projects
+          {t('viewProjects')}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>

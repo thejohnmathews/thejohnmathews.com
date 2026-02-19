@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-const roles = [
-  "embedded software engineer",
-  "full stack developer",
-];
+import {useState, useEffect} from "react";
+import {useTranslations} from 'next-intl';
 
 export default function TerminalHero() {
+  const t = useTranslations('TerminalHero');
+  const roles = [t('role0'), t('role1')];
+
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -34,7 +33,7 @@ export default function TerminalHero() {
     }, timeout);
 
     return () => clearTimeout(timer);
-  }, [displayText, isDeleting, currentRole]);
+  }, [displayText, isDeleting, currentRole, roles]);
 
   return (
     <div className="rounded-lg border border-border bg-card p-6 relative">
@@ -43,7 +42,7 @@ export default function TerminalHero() {
         <div className="h-3 w-3 rounded-full bg-primary/40" />
         <div className="h-3 w-3 rounded-full bg-accent/60" />
         <span className="ml-2 font-mono text-[10px] text-muted-foreground">
-          ~/overview
+          {t('overview')}
         </span>
       </div>
       <div className="font-mono text-sm space-y-2">

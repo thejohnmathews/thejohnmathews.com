@@ -1,8 +1,13 @@
-import { Mail } from "lucide-react";
+"use client";
+
+import {Mail} from "lucide-react";
 import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import {FaGithub, FaLinkedin} from "react-icons/fa";
+import {useTranslations} from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+
   return (
     <footer className="mt-20 border-t border-border pt-6">
       <div className="flex flex-col items-center gap-4">
@@ -34,11 +39,10 @@ export default function Footer() {
           </Link>
         </div>
 
-        {/* Code comment style info */}
         <div className="text-center">
           <p className="font-mono text-xs text-muted-foreground">
             <span className="text-primary">// </span>
-            built with next.js + typescript + tailwind
+            {t('builtWith')}
             <span className="text-primary"> — </span>
             {new Date().getFullYear()}
           </p>
